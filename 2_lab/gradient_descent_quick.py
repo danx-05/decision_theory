@@ -17,7 +17,8 @@ def difference(x,y, lambd = 1.0):
 def phi(xk, gr, lambd):
     return f(difference(xk, gr, lambd))
 
-def dichotomy(xk, gr, a = 0, b = 3, epsilon = 10 ** (-6), delta = 10 ** (-7)):
+def dichotomy(xk, gr, a = 0, b = 3, epsilon = 10 ** (-7), delta = 10 ** (-8)):
+    k = 0
     while abs(b - a) > epsilon:
         x1 = (a + b - delta) / 2
         x2 = (a + b + delta) / 2
@@ -25,25 +26,27 @@ def dichotomy(xk, gr, a = 0, b = 3, epsilon = 10 ** (-6), delta = 10 ** (-7)):
             a = x1
         else:
             b = x2
-    return (a+b) / 2
+        k += 1
+    return (a+b) / 2 , k
 def gradient_descent_const(x_start, epsilon = 10 ** (-6)):
     lambd = 0.5
-    k = 2
     n = 1
-
+    count = 0
     xk = x_start
     xk1 = difference(xk, grad(xk), lambd = lambd)
     while abs(f(xk1) - f(xk)) > epsilon:
         xk = xk1
         gr = grad(xk)
-        lambd = dichotomy(xk, gr)
+        lambd, k = dichotomy(xk, gr)
+        count += k
         xk1 = difference(xk, grad(xk), lambd = lambd)
         n += 1
 
-    return xk1, f(xk1), n
+    return xk1, f(xk1), n, count
 
 if __name__ == '__main__':
-    x_min, f_min, n = gradient_descent_const([0,0])
+    x_min, f_min, n, count = gradient_descent_const([0,0])
     print("Вектор х: " , x_min)
     print("Минимальное значение: ", f_min)
     print("Количество операций", n)
+    print("Количество операций дихотомии", count)
