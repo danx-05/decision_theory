@@ -17,7 +17,6 @@ def difference(x,y, lambd = 1.0):
 def gradient_descent_const(x_start, epsilon = 10 ** (-6)):
     lambd = 0.5
     n = 1
-
     xk = x_start
     xk1 = difference(xk, grad(xk), lambd = lambd)
     while abs(f(xk1) - f(xk)) > epsilon:

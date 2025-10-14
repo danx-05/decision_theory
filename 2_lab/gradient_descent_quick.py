@@ -28,6 +28,7 @@ def dichotomy(xk, gr, a = 0, b = 3, epsilon = 10 ** (-7), delta = 10 ** (-8)):
             b = x2
         k += 1
     return (a+b) / 2 , k
+
 def gradient_descent_const(x_start, epsilon = 10 ** (-6)):
     lambd = 0.5
     n = 1
@@ -41,7 +42,6 @@ def gradient_descent_const(x_start, epsilon = 10 ** (-6)):
         count += k
         xk1 = difference(xk, grad(xk), lambd = lambd)
         n += 1
-
     return xk1, f(xk1), n, count
 
 if __name__ == '__main__':
