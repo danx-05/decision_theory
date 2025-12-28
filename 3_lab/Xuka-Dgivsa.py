@@ -7,7 +7,6 @@ def f(x):
 
 
 def method_XDg(x0, lambd, alpha, epsilon = 10**(-6)):
-    lambd0 = lambd
     k = 0
     while lambd > epsilon:
         k += 1
